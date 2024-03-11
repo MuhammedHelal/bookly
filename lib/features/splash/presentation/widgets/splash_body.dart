@@ -1,7 +1,10 @@
 import 'package:bookly/core/consts/assets.dart';
+import 'package:bookly/core/consts/values.dart';
+import 'package:bookly/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class SplashBody extends StatefulWidget {
   const SplashBody({super.key});
@@ -16,7 +19,17 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
+    initSlidingAnimation();
+    navigateToHome();
+  }
 
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  void initSlidingAnimation() {
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -32,11 +45,17 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
     animationController.forward();
   }
 
-  @override
-  void dispose() {
-    animationController.dispose();
-
-    super.dispose();
+  void navigateToHome() {
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        Get.to(
+          () => const HomeView(),
+          transition: Transition.cupertino,
+          duration: MyValues.transitionDuration,
+        );
+      },
+    );
   }
 
   @override
