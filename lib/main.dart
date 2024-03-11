@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Bookly App',
-      theme: ThemeData(
+      themeMode: ThemeMode.dark,
+      theme: ThemeData.dark(
               //  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               //  useMaterial3: true,
               )
